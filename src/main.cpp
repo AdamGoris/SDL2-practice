@@ -17,8 +17,7 @@ int main(int argv, char** args) {
 
 	float r_x = 0;
 	float r_y = 0;
-	bool hit_right = false;
-	bool hit_left = true;	// start hit_left true to force moving right initially
+	bool moving_right = true;
 
 	while (isRunning) {
 		while (SDL_PollEvent(&event)) {
@@ -54,21 +53,18 @@ int main(int argv, char** args) {
 		// Check for x-axis collisions
 
 		if (r_x >= W_WIDTH - 150) {
-			hit_right = true;
-			hit_left = false;
+			moving_right = false;
 		}
 		if (r_x <= 0) {
-			hit_right = false;
-			hit_left = true;
+			moving_right = true;
 		}
 
 		// Move the rect in the direction of travel
 
-		if (hit_right) {
-			r_x -= 0.01;
-		}
-		if (hit_left) {
+		if (moving_right) {
 			r_x += 0.01;
+		} else {
+			r_x -= 0.01;
 		}
 
 		// Draw the background in black
