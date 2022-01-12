@@ -51,20 +51,22 @@ int main(int argv, char** args) {
 		rect.h = 150;
 		SDL_RenderFillRect(renderer, &rect);
 		
+		// Check for x-axis collisions
+
 		if (r_x >= W_WIDTH - 150) {
 			hit_right = true;
 			hit_left = false;
 		}
-
 		if (r_x <= 0) {
 			hit_right = false;
 			hit_left = true;
 		}
 
+		// Move the rect in the direction of travel
+
 		if (hit_right) {
 			r_x -= 0.01;
 		}
-
 		if (hit_left) {
 			r_x += 0.01;
 		}
