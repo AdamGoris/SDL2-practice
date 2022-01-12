@@ -62,9 +62,9 @@ int main(int argv, char** args) {
 		// Move the rect in the direction of travel
 
 		if (moving_right) {
-			r_x += 0.01;
+			r_x += 0.1;
 		} else {
-			r_x -= 0.01;
+			r_x -= 0.1;
 		}
 
 		// Draw the background in black
