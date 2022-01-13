@@ -1,5 +1,7 @@
 This repo is for personal use for practicing/learning SDL2.
 
+The goal of this branch is to follow the 'Beginning Game Programming v2.0' tutorial from Lazy Foo found here: https://lazyfoo.net/tutorials/SDL/
+
 ## Installation
 
 ### MSYS2
