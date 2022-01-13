@@ -17,8 +17,8 @@ int main(int argv, char** args) {
 	// Initial location is the center of the window
 
 	const int SIDE = 50;
-	int r_x = W_WIDTH - (SIDE / 2);
-	int r_y = W_HEIGHT - (SIDE / 2);
+	int r_x = (W_WIDTH / 2) - (SIDE / 2);
+	int r_y = (W_HEIGHT / 2) - (SIDE / 2);
 	int r_w = SIDE;
 	int r_h = SIDE;
 
