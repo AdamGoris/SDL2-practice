@@ -1,5 +1,7 @@
 This repo is for personal use for practicing/learning SDL2.
 
+The goal of this branch is to draw a circle by implementing the 'Midpoint Circle Algorithm'. ref https://en.wikipedia.org/wiki/Midpoint_circle_algorithm#C_Example 
+
 ## Installation
 
 ### MSYS2
