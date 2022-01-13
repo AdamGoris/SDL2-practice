@@ -16,7 +16,7 @@ int main(int argv, char** args) {
 	// Variables for rect object location
 	// Initial location is the center of the window
 
-	const int SIDE = 50;
+	const int SIDE = 60;
 	int r_x = (W_WIDTH / 2) - (SIDE / 2);
 	int r_y = (W_HEIGHT / 2) - (SIDE / 2);
 	int r_w = SIDE;
@@ -30,6 +30,8 @@ int main(int argv, char** args) {
 	bool move_up = false;
 	bool move_down = false;
 
+	const int SPEED = 10;
+
 	while (isRunning) {
 		while (SDL_PollEvent(&event)) {
 			switch (event.type) {
@@ -40,6 +42,18 @@ int main(int argv, char** args) {
 				case SDL_KEYDOWN:
 					if (event.key.keysym.sym == SDLK_ESCAPE) {
 						isRunning = false;
+					}
+					if (event.key.keysym.sym == SDLK_RIGHT) {
+						move_right = true;
+					}
+					if (event.key.keysym.sym == SDLK_LEFT) {
+						move_left = true;
+					}
+					if (event.key.keysym.sym == SDLK_UP) {
+						move_up = true;
+					}
+					if (event.key.keysym.sym == SDLK_DOWN) {
+						move_down = true;
 					}
 			}
 		}
@@ -57,6 +71,23 @@ int main(int argv, char** args) {
 		rect.w = r_w;
 		rect.h = r_h;
 		SDL_RenderFillRect(renderer, &rect);
+
+		if (move_right) {
+			r_x += SPEED;
+			move_right = false;
+		}
+		if (move_left) {
+			r_x -= SPEED;
+			move_left = false;
+		}
+		if (move_up) {
+			r_y -= SPEED;
+			move_up = false;
+		}
+		if (move_down) {
+			r_y += SPEED;
+			move_down = false;
+		}
 
 		// Draw the background in black
 
