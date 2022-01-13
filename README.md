@@ -1,5 +1,7 @@
 This repo is for personal use for practicing/learning SDL2.
 
+The goal of this branch is to learn simple animation in SDL2 by simulating the 'DVD logo' bouncing around the window.
+
 ## Installation
 
 ### MSYS2
