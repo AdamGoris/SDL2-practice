@@ -13,6 +13,23 @@ int main(int argv, char** args) {
 	bool isRunning = true;
 	SDL_Event event;
 
+	// Variables for rect object location
+	// Initial location is the center of the window
+
+	const int SIDE = 50;
+	int r_x = W_WIDTH - (SIDE / 2);
+	int r_y = W_HEIGHT - (SIDE / 2);
+	int r_w = SIDE;
+	int r_h = SIDE;
+
+	// Variables to determine if the object is being moved
+	// Initially, the object is not moving in any direction
+
+	bool move_right = false;
+	bool move_left = false;
+	bool move_up = false;
+	bool move_down = false;
+
 	while (isRunning) {
 		while (SDL_PollEvent(&event)) {
 			switch (event.type) {
@@ -30,6 +47,16 @@ int main(int argv, char** args) {
 		// Clear the renderer
 
 		SDL_RenderClear(renderer);
+
+		// Draw the rect in orange
+
+		SDL_SetRenderDrawColor(renderer, 230, 70, 20, 255);
+		SDL_Rect rect;
+		rect.x = r_x;
+		rect.y = r_y;
+		rect.w = r_w;
+		rect.h = r_h;
+		SDL_RenderFillRect(renderer, &rect);
 
 		// Draw the background in black
 
