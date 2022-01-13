@@ -33,7 +33,7 @@ int main(int argv, char** args) {
 
 		// Draw the background in black
 
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 		// Render updated renderer 
 
