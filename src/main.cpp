@@ -13,12 +13,6 @@ int main(int argv, char** args) {
 	bool isRunning = true;
 	SDL_Event event;
 
-	// Variables for animating rect
-
-	float r_x = 0;
-	float r_y = 0;
-	bool moving_right = true;
-
 	while (isRunning) {
 		while (SDL_PollEvent(&event)) {
 			switch (event.type) {
@@ -36,36 +30,6 @@ int main(int argv, char** args) {
 		// Clear the renderer
 
 		SDL_RenderClear(renderer);
-
-		// Draw the rectangle in purple
-
-		SDL_SetRenderDrawColor(renderer, 110, 20, 255, 255);
-
-		// Draw a rectangle
-
-		SDL_Rect rect;
-		rect.x = r_x;
-		rect.y = W_HEIGHT/2;
-		rect.w = 150;
-		rect.h = 150;
-		SDL_RenderFillRect(renderer, &rect);
-		
-		// Check for x-axis collisions
-
-		if (r_x >= W_WIDTH - 150) {
-			moving_right = false;
-		}
-		if (r_x <= 0) {
-			moving_right = true;
-		}
-
-		// Move the rect in the direction of travel
-
-		if (moving_right) {
-			r_x += 0.1;
-		} else {
-			r_x -= 0.1;
-		}
 
 		// Draw the background in black
 
