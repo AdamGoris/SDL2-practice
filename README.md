@@ -1,5 +1,7 @@
 This repo is for personal use for practicing/learning SDL2.
 
+The goal of this branch is to implement a method of moving an object around the screen via user input.
+
 ## Installation
 
 ### MSYS2
