@@ -1,8 +1,23 @@
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <stdlib.h>
 
 const int W_WIDTH = 800;
 const int W_HEIGHT = 600;
+
+struct RGB { // Stores rgb values
+	int r;
+	int g;
+	int b;
+};
+
+// Set random r, g, b values for the given RGB pointer
+
+void randomColour(RGB *rgb) {
+	rgb->r = rand() % 255;
+	rgb->g = rand() % 255;
+	rgb->b = rand() % 255;
+}
 
 int main(int argv, char** args) {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -21,6 +36,10 @@ int main(int argv, char** args) {
 	const float SIDE = 50.0;
 	float x_speed = 0.05;
 	float y_speed = 0.05;
+	struct RGB r_rgb;
+	r_rgb.r = 110;
+	r_rgb.g = 20;
+	r_rgb.b = 255;
 
 	while (isRunning) {
 		while (SDL_PollEvent(&event)) {
@@ -42,7 +61,7 @@ int main(int argv, char** args) {
 
 		// Draw the rectangle in purple
 
-		SDL_SetRenderDrawColor(renderer, 110, 20, 255, 255);
+		SDL_SetRenderDrawColor(renderer, r_rgb.r, r_rgb.g, r_rgb.b, 255);
 
 		// Draw a rectangle
 
@@ -62,12 +81,20 @@ int main(int argv, char** args) {
 
 		if (r_x >= (W_WIDTH - SIDE) || r_x <= 0) {
 			x_speed *= -1;
+
+			// If collision occurs, change randomize rect colour
+
+			randomColour(&r_rgb);
 		}
 
 		// Check for y axis collisions against height
 
 		if (r_y >= (W_HEIGHT - SIDE) || r_y <= 0) {
 			y_speed *= -1;
+
+			// If collision occurs, change randomize rect colour
+
+			randomColour(&r_rgb);
 		}
 
 		// Draw the background in black
