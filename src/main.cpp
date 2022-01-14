@@ -31,15 +31,18 @@ int main(int argv, char** args) {
 						isRunning = false;
 					}
 					if (event.key.keysym.sym == SDLK_SPACE) {
-						C_CENTER_X = rand() % W_WIDTH;
-						C_CENTER_Y = rand() % W_HEIGHT;
+						// On space, move circle to random x,y
+						// Ensure no part of the circle is outside the window
+
+						C_CENTER_X = (rand() % (W_WIDTH - DIAMETER)) + RADIUS;
+						C_CENTER_Y = (rand() % (W_HEIGHT - DIAMETER)) + RADIUS;
 					}
 			}
 		}
 
 		// Clear the renderer
 
-		SDL_RenderClear(renderer);
+    SDL_RenderClear(renderer);
 
 		// Draw the circle in white 
 
