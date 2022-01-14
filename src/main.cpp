@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <stdlib.h>
 
 const int W_WIDTH = 800;
 const int W_HEIGHT = 600;
@@ -15,8 +16,8 @@ int main(int argv, char** args) {
 
 	const int RADIUS = 50;
 	const int DIAMETER = RADIUS * 2;
-	const int W_CENTER_X = W_WIDTH / 2;
-	const int W_CENTER_Y = W_HEIGHT / 2;
+	int C_CENTER_X = W_WIDTH / 2;
+	int C_CENTER_Y = W_HEIGHT / 2;
 
 	while (isRunning) {
 		while (SDL_PollEvent(&event)) {
@@ -28,6 +29,10 @@ int main(int argv, char** args) {
 				case SDL_KEYDOWN:
 					if (event.key.keysym.sym == SDLK_ESCAPE) {
 						isRunning = false;
+					}
+					if (event.key.keysym.sym == SDLK_SPACE) {
+						C_CENTER_X = rand() % W_WIDTH;
+						C_CENTER_Y = rand() % W_HEIGHT;
 					}
 			}
 		}
@@ -46,15 +51,15 @@ int main(int argv, char** args) {
 		while (x > y) {
 			// Render a point on each octant of the circle
 
-			SDL_RenderDrawPoint(renderer, W_CENTER_X + x, W_CENTER_Y - y);
-			SDL_RenderDrawPoint(renderer, W_CENTER_X + x, W_CENTER_Y + y);
-			SDL_RenderDrawPoint(renderer, W_CENTER_X - x, W_CENTER_Y - y);
-			SDL_RenderDrawPoint(renderer, W_CENTER_X - x, W_CENTER_Y + y);
+			SDL_RenderDrawPoint(renderer, C_CENTER_X + x, C_CENTER_Y - y);
+			SDL_RenderDrawPoint(renderer, C_CENTER_X + x, C_CENTER_Y + y);
+			SDL_RenderDrawPoint(renderer, C_CENTER_X - x, C_CENTER_Y - y);
+			SDL_RenderDrawPoint(renderer, C_CENTER_X - x, C_CENTER_Y + y);
 
-			SDL_RenderDrawPoint(renderer, W_CENTER_X + y, W_CENTER_Y - x);
-			SDL_RenderDrawPoint(renderer, W_CENTER_X + y, W_CENTER_Y + x);
-			SDL_RenderDrawPoint(renderer, W_CENTER_X - y, W_CENTER_Y - x);
-			SDL_RenderDrawPoint(renderer, W_CENTER_X - y, W_CENTER_Y + x);
+			SDL_RenderDrawPoint(renderer, C_CENTER_X + y, C_CENTER_Y - x);
+			SDL_RenderDrawPoint(renderer, C_CENTER_X + y, C_CENTER_Y + x);
+			SDL_RenderDrawPoint(renderer, C_CENTER_X - y, C_CENTER_Y - x);
+			SDL_RenderDrawPoint(renderer, C_CENTER_X - y, C_CENTER_Y + x);
 
 			y++;
 			if (p <= 0) {
