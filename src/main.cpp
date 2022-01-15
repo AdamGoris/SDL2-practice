@@ -1,4 +1,4 @@
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <iostream>
 
 const int W_WIDTH = 800;
