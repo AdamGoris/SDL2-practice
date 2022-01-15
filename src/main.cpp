@@ -1,48 +1,110 @@
 #include <SDL2/SDL.h>
+#include <stdio.h>
 #include <iostream>
+using namespace std;
 
-const int W_WIDTH = 800;
-const int W_HEIGHT = 600;
+//Screen dimension constants
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
 
-int main(int argv, char** args) {
-	SDL_Init(SDL_INIT_EVERYTHING);
+//The window we'll be rendering to
+SDL_Window *gWindow = NULL;
 
-	SDL_Window *window = SDL_CreateWindow("Hello SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, W_WIDTH, W_HEIGHT, 0);
-	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
+//The surface contained by the window
+SDL_Surface *gScreenSurface = NULL;
 
-	bool isRunning = true;
-	SDL_Event event;
+//The image we will load and show on the screen
+SDL_Surface *gHelloWorld = NULL;
 
-	while (isRunning) {
-		while (SDL_PollEvent(&event)) {
-			switch (event.type) {
-				case SDL_QUIT:
-					isRunning = false;
-					break;
+bool init()
+{
+	//Initialization flag
+	bool success = true;
 
-				case SDL_KEYDOWN:
-					if (event.key.keysym.sym == SDLK_ESCAPE) {
-						isRunning = false;
-					}
-			}
+	//Initialize SDL
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	{
+		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+		success = false;
+	}
+	else
+	{
+		//Create window
+		gWindow = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		if (gWindow == NULL)
+		{
+			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+			success = false;
 		}
-
-		// Clear the renderer
-
-		SDL_RenderClear(renderer);
-
-		// Draw the background in black
-
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-		// Render updated renderer 
-
-		SDL_RenderPresent(renderer);
+		else
+		{
+			//Get window surface
+			gScreenSurface = SDL_GetWindowSurface(gWindow);
+		}
 	}
 
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(window);
+	return success;
+}
+
+bool loadMedia()
+{
+	//Loading success flag
+	bool success = true;
+
+	//Load splash image
+	gHelloWorld = SDL_LoadBMP("HelloGameWorld/assets/hello_world.bmp");
+	if (gHelloWorld == NULL)
+	{
+		printf("Unable to load image %s! SDL Error: %s\n", "HelloGameWorld/assets/hello_world.bmp", SDL_GetError());
+		success = false;
+	}
+
+	return success;
+}
+
+void close()
+{
+	//Deallocate surface
+	SDL_FreeSurface(gHelloWorld);
+	gHelloWorld = NULL;
+
+	//Destroy window
+	SDL_DestroyWindow(gWindow);
+	gWindow = NULL;
+
+	//Quit SDL subsystems
 	SDL_Quit();
+}
+
+int main(int argc, char *args[])
+{
+	cout << "running main";
+
+	//Start up SDL and create window
+	if (!init())
+	{
+		printf("Failed to initialize!\n");
+	}
+	else
+	{
+		//Load media
+		if (!loadMedia())
+		{
+			printf("Failed to load media!\n");
+		}
+		else
+		{
+			//Apply the image
+			SDL_BlitSurface(gHelloWorld, NULL, gScreenSurface, NULL);
+			//Update the surface
+			SDL_UpdateWindowSurface(gWindow);
+			//Wait two seconds
+			SDL_Delay(6000);
+		}
+	}
+
+	//Free resources and close SDL
+	close();
 
 	return 0;
 }
