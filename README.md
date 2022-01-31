@@ -10,18 +10,10 @@ Download and Install MSYS2 from https://www.msys2.org/ and follow the instructio
 3. Re-run MSYS and enter the command `pacman -Su`
 4. Install mingw64 toolchain by entering the command `pacman -S --needed base-devel mingw-w64-x86_64-toolchain`
 5. Install GLFW by entering the command `pacman -S mingw-w64-x86_64-glfw`
-6. Optional: Add `C:/msys64/mingw64/bin` to the Path environment variable to use mingw commands in cmd.
+6. Add `C:/msys64/mingw64/bin` to the Path environment variable to use mingw commands in cmd.
+7. Install SDL2_ttf (and SDL2) using the command `pacman -S mingw-w64-x86_64-SDL2_ttf`
 
-Following these steps installs gcc, g++, and gdb for compiling and debugging C/C++ programs.
-
-### SDL2
-
-Go to https://www.libsdl.org/download-2.0.php
-Download and install the Windows 64 Runtime Binaries and the Development Libraries.
-
-Extract both zips to `C:/SDL2`
-Rename the runtime binaries folder to `SDL2-2.0.20`
-Rename the development libraries folder to `SDL2-devel-2.0.20` 
+Following these steps installs gcc, g++, and gdb for compiling and debugging C/C++ programs as well as SDL2, SDL2_ttf
 
 ### GLAD
 
